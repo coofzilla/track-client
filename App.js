@@ -14,27 +14,44 @@ const App = () => {
   const Tab = createBottomTabNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const MainFlow = () => {
+    return (
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Screen name="TrackListFlow" component={TrackListFlow} />
+        <Screen name="TrackCreate" component={TrackCreateScreen} />
+        <Screen name="Account" component={AccountScreen} />
+      </Tab.Navigator>
+    );
+  };
+
+  const TrackListFlow = () => {
+    return (
+      <Navigator screenOptions={{ title: null }}>
+        <Screen name="TrackList" component={TrackListScreen} />
+        <Screen name="TrackDetail" component={TrackDetailScreen} />
+      </Navigator>
+    );
+  };
+
+  const LoginFlow = () => {
+    return (
+      <Navigator screenOptions={{ title: null }}>
+        <Screen name="Signup" component={SignupScreen} />
+        <Screen name="Signin" component={SigninScreen} />
+      </Navigator>
+    );
+  };
+
   return (
     <NavigationContainer>
-      <Navigator screenOptions={{ initialRouteName: "Signin" }}>
-        {isLoggedIn ? (
-          <Tab.Navigator>
-            <Screen name="TrackCreate" component={TrackCreateScreen} />
-            <Screen name="Account" component={AccountScreen} />
-            <Tab.Navigator>
-              <Screen name="TrackDetail" component={TrackDetailScreen} />
-              <Screen name="TrackList" component={TrackListScreen} />
-            </Tab.Navigator>
-          </Tab.Navigator>
-        ) : (
-          <>
-            <Screen name="Signup" component={SignupScreen} />
-            <Screen name="Signin" component={SigninScreen} />
-          </>
-        )}
+      <Navigator screenOptions={{ headerShown: false }}>
+        <Screen name="LoginFlow" component={LoginFlow} />
+        <Screen name="MainFlow" component={MainFlow} />
       </Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
+
+// {isLoggedIn ? <></> : <></>}
