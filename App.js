@@ -35,7 +35,7 @@ const App = () => {
 
   const LoginFlow = () => {
     return (
-      <Navigator screenOptions={{ title: null }}>
+      <Navigator>
         <Screen name="Signup" component={SignupScreen} />
         <Screen name="Signin" component={SigninScreen} />
       </Navigator>
