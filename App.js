@@ -26,7 +26,7 @@ const App = () => {
 
   const TrackListFlow = () => {
     return (
-      <Navigator screenOptions={{ title: null }}>
+      <Navigator screenOptions={{ title: "Tracks" }}>
         <Screen name="TrackList" component={TrackListScreen} />
         <Screen name="TrackDetail" component={TrackDetailScreen} />
       </Navigator>
