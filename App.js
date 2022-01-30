@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Provider as AuthProvider } from "./src/context/AuthContext";
+import {
+  Provider as AuthProvider,
+  Context as AuthContext,
+} from "./src/context/AuthContext";
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import SignupScreen from "./src/screens/SignupScreen";
@@ -13,6 +16,7 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 const App = () => {
   const { Navigator, Screen } = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
+  const { state } = useContext(AuthContext);
 
   const MainFlow = () => {
     return (
@@ -45,8 +49,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
-        <Screen name="LoginFlow" component={LoginFlow} />
-        <Screen name="MainFlow" component={MainFlow} />
+        {state.token ? (
+          <Screen name="MainFlow" component={MainFlow} />
+        ) : (
+          <Screen name="LoginFlow" component={LoginFlow} />
+        )}
       </Navigator>
     </NavigationContainer>
   );
@@ -59,5 +66,3 @@ export default () => {
     </AuthProvider>
   );
 };
-
-// {isLoggedIn ? <></> : <></>}
