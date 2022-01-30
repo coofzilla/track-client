@@ -22,3 +22,4 @@ const createDataContext = (reducer, actions, initialState) => {
 };
 
 export default createDataContext;
+
