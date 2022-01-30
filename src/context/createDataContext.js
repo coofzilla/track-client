@@ -10,7 +10,7 @@ const createDataContext = (reducer, actions, initialState) => {
     for (let key in actions) {
       boundActions[key] = actions[key](dispatch);
     }
-    console.log("BOUND ACTIONS", boundActions);
+    // console.log("BOUND ACTIONS", boundActions);
     return (
       <Context.Provider value={{ state, ...boundActions }}>
         {children}
@@ -22,4 +22,3 @@ const createDataContext = (reducer, actions, initialState) => {
 };
 
 export default createDataContext;
-
