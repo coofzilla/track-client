@@ -1,11 +1,11 @@
-import React, { useLayoutEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useLayoutEffect, useContext } from "react";
+import { View, StyleSheet } from "react-native";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
 
 const SigninScreen = ({ navigation }) => {
-  //   const { state, signin } = useContext(AuthContext);
+  const { state, signin } = useContext(AuthContext);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -17,9 +17,9 @@ const SigninScreen = ({ navigation }) => {
     <View style={styles.container}>
       <AuthForm
         headerText="Sign in to your Account"
-        errorMessage=""
+        errorMessage={state.errorMessage}
         submitButtonText="Sign in"
-        onSubmit={() => {}}
+        onSubmit={signin}
       />
       <NavLink
         routeName="Signup"
