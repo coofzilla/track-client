@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
 
 const TrackListScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Tracks",
+    });
+  }, [navigation]);
+
   return (
     <View>
       <Text style={{ fontSize: 48 }}>TrackList Screen</Text>
