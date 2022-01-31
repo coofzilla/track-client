@@ -1,16 +1,18 @@
-import React, { useLayoutEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
 
 const SigninScreen = ({ navigation }) => {
-  const { state, signin } = useContext(AuthContext);
+  const { state, signin, clearErrorMessage } = useContext(AuthContext);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      clearErrorMessage();
     });
+
+    return unsubscribe;
   }, [navigation]);
 
   return (

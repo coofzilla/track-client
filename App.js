@@ -14,7 +14,7 @@ import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 
 const App = () => {
-  const { Navigator, Screen } = createNativeStackNavigator();
+  const { Navigator, Screen, Group } = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { state } = useContext(AuthContext);
 
@@ -39,7 +39,7 @@ const App = () => {
 
   const LoginFlow = () => {
     return (
-      <Navigator>
+      <Navigator screenOptions={{ headerShown: false }}>
         <Screen name="Signup" component={SignupScreen} />
         <Screen name="Signin" component={SigninScreen} />
       </Navigator>
