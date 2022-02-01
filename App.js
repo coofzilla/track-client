@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { navigationRef } from "./RootNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -15,9 +16,10 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const App = () => {
-  const { Navigator, Screen, Group } = createNativeStackNavigator();
+  const { Navigator, Screen } = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { state } = useContext(AuthContext);
+  console.log(state);
 
   const MainFlow = () => {
     return (
@@ -48,7 +50,7 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Navigator screenOptions={{ headerShown: false }}>
         {state.token ? (
           <Screen name="MainFlow" component={MainFlow} />
