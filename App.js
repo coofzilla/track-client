@@ -12,6 +12,7 @@ import SignupScreen from "./src/screens/SignupScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const App = () => {
   const { Navigator, Screen, Group } = createNativeStackNavigator();
@@ -52,7 +53,10 @@ const App = () => {
         {state.token ? (
           <Screen name="MainFlow" component={MainFlow} />
         ) : (
-          <Screen name="LoginFlow" component={LoginFlow} />
+          <>
+            <Screen name="Resolve" component={ResolveAuthScreen} />
+            <Screen name="LoginFlow" component={LoginFlow} />
+          </>
         )}
       </Navigator>
     </NavigationContainer>
