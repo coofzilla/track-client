@@ -22,9 +22,9 @@ const tryLocalSignin = (dispatch) => async () => {
   const token = await AsyncStorage.getItem("token");
   if (token) {
     dispatch({ type: "signin", payload: token });
-    RootNavigation.navigationRef.navigate("TrackList");
+    RootNavigation.navigate("TrackList");
   } else {
-    RootNavigation.navigationRef.navigate("LoginFlow");
+    RootNavigation.navigate("LoginFlow");
   }
 };
 
