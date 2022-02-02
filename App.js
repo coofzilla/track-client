@@ -19,7 +19,6 @@ const App = () => {
   const { Navigator, Screen } = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { state } = useContext(AuthContext);
-  console.log(state);
 
   const MainFlow = () => {
     return (
