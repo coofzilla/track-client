@@ -5,28 +5,32 @@ import {
   Accuracy,
 } from "expo-location";
 
-const useLocation = (callback) => {
+const useLocation = (shouldTrack, callback) => {
   const [err, setErr] = useState(null);
+  const [subscriber, setSubscriber] = useState(null);
 
   const startWatching = async () => {
     const { granted } = await requestForegroundPermissionsAsync();
     if (!granted) setErr(true);
-    const remove = await watchPositionAsync(
+    const sub = await watchPositionAsync(
       {
         accuracy: Accuracy.BestForNavigation,
         timeInterval: 1000,
         distanceInterval: 10,
       },
       callback
-      //   (location) => {
-      //     addLocation(location);
-      //   }
     );
+    setSubscriber(sub);
   };
 
   useEffect(() => {
-    startWatching();
-  }, []);
+    if (shouldTrack) {
+      startWatching();
+    } else {
+      subscriber.remove();
+      setSubscriber(null);
+    }
+  }, [shouldTrack]);
   //return what vars will need when use hook
   return [err];
 };
