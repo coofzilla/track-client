@@ -7,30 +7,36 @@ import {
 
 const useLocation = (shouldTrack, callback) => {
   const [err, setErr] = useState(null);
-  const [subscriber, setSubscriber] = useState(null);
-
-  const startWatching = async () => {
-    const { granted } = await requestForegroundPermissionsAsync();
-    if (!granted) setErr(true);
-    const sub = await watchPositionAsync(
-      {
-        accuracy: Accuracy.BestForNavigation,
-        timeInterval: 1000,
-        distanceInterval: 10,
-      },
-      callback
-    );
-    setSubscriber(sub);
-  };
+  //   const [subscriber, setSubscriber] = useState(null);
 
   useEffect(() => {
+    let subscriber;
+    const startWatching = async () => {
+      const { granted } = await requestForegroundPermissionsAsync();
+      if (!granted) setErr(true);
+      subscriber = await watchPositionAsync(
+        {
+          accuracy: Accuracy.BestForNavigation,
+          timeInterval: 1000,
+          distanceInterval: 10,
+        },
+        callback
+      );
+    };
+
     if (shouldTrack) {
       startWatching();
     } else {
-      subscriber.remove();
-      setSubscriber(null);
+      if (subscriber) subscriber.remove();
+      subscriber = null;
     }
-  }, [shouldTrack]);
+
+    return () => {
+      if (subscriber) {
+        subscriber.remove();
+      }
+    };
+  }, [shouldTrack, callback]);
   //return what vars will need when use hook
   return [err];
 };
