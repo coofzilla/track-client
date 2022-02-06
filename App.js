@@ -35,7 +35,11 @@ const App = () => {
   const TrackListFlow = () => {
     return (
       <Navigator>
-        <Screen name="TrackList" component={TrackListScreen} />
+        <Screen
+          name="TrackList"
+          component={TrackListScreen}
+          options={{ title: "Tracks" }}
+        />
         <Screen name="TrackDetail" component={TrackDetailScreen} />
       </Navigator>
     );
