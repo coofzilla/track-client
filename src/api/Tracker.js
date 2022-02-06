@@ -3,7 +3,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const instance = axios.create({
   //change baseURL based on ngrok session
-  baseURL: "http://localhost:3000/",
+  baseURL: "http://682c-61-74-229-93.ngrok.io",
+  //   baseURL: "http://localhost:3000/",
 });
 
 instance.interceptors.request.use(

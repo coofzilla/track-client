@@ -10,13 +10,15 @@ const TrackListScreen = ({ navigation }) => {
     const unsubscribe = navigation.addListener("focus", () => {
       fetchTracks();
     });
+    navigation.setOptions({
+      title: "Tracks",
+    });
 
     return unsubscribe;
   }, [navigation]);
 
   return (
     <>
-      <Text style={{ fontSize: 48 }}>TrackList Screen</Text>
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}

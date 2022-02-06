@@ -16,6 +16,7 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const App = () => {
   const { Navigator, Screen } = createNativeStackNavigator();
@@ -25,9 +26,48 @@ const App = () => {
   const MainFlow = () => {
     return (
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Screen name="TrackListFlow" component={TrackListFlow} />
-        <Screen name="TrackCreate" component={TrackCreateScreen} />
-        <Screen name="Account" component={AccountScreen} />
+        <Screen
+          name="Tracks"
+          component={TrackListFlow}
+          options={{
+            title: "Tracks",
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="view-list"
+                size={30}
+                color="black"
+              />
+            ),
+          }}
+        />
+        <Screen
+          name="TrackCreate"
+          component={TrackCreateScreen}
+          options={{
+            title: "Add Track",
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="go-kart-track"
+                color="black"
+                size={30}
+              />
+            ),
+          }}
+        />
+        <Screen
+          name="Account"
+          component={AccountScreen}
+          options={{
+            title: "Account",
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="account-settings"
+                size={30}
+                color="black"
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     );
   };
@@ -35,12 +75,12 @@ const App = () => {
   const TrackListFlow = () => {
     return (
       <Navigator>
+        <Screen name="TrackList" component={TrackListScreen} />
         <Screen
-          name="TrackList"
-          component={TrackListScreen}
-          options={{ title: "Tracks" }}
+          name="TrackDetail"
+          component={TrackDetailScreen}
+          options={{ title: null }}
         />
-        <Screen name="TrackDetail" component={TrackDetailScreen} />
       </Navigator>
     );
   };
